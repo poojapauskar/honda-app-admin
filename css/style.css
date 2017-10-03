@@ -1,0 +1,310 @@
+@import url('fonts.css');
+
+#row4{
+    margin-top:5%;;
+    margin-left:-11.1%;
+}
+#head_list, #body_list { display: block; }
+
+
+#body_list {
+    height: 420px;       /* Just for the demo          */
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
+}
+
+
+#list {
+    width: 100%; /* Optional */
+}
+
+
+
+.logout_btn{
+   -moz-transform: scale(0.2) !important;
+  -webkit-transform: scale(0.2) !important;
+  transform: scale(0.2) !important;
+}
+#no_res{
+    font-size:16px;
+    text-align:center;
+    margin-top:1%;
+}
+#admin_console{
+    font-family: Roboto-Regular !important;
+}
+h6{
+    color:white !important;
+    font-size: 16px !important;
+    font-family: Roboto-Regular !important;
+}
+h5{
+    font-family: Roboto-Regular !important;
+    font-size: 20px !important;
+}
+button{
+    color:white !important;
+    font-family: Roboto-Regular !important;
+}
+#example{
+    margin-top: -3%;
+    width:73% !important;
+    table-layout: fixed;
+}
+i{
+    color:#E8E8E8;
+}
+.search{
+    color:#E8E8E8;
+}
+td{
+    font-size: 10px !important;
+    font-family: Roboto-Regular !important;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+}
+td:hover{
+    font-size: 10px !important;
+    font-family: Roboto-Regular !important;
+    text-overflow:initial;
+    overflow:initial;
+    white-space:initial;
+}
+
+th{
+    font-family: Roboto-Regular !important;
+    text-overflow:initial;
+    overflow:initial;
+    white-space:initial;
+}
+.pagination{
+    /*margin-top:-1% !important;*/
+}
+#row1{
+    margin-top: 12% !important;
+    width:84.3% !important;
+}
+
+
+html, body, #background { min-height: 100vh; min-width: 100vw; background-color:#E8E8E8;}
+/*thead, tbody { display: block; }
+
+#example tbody {
+    height: 250px;   
+    overflow-y: auto;   
+    overflow-x: auto; 
+}*/
+
+/*th
+{
+    width: 100%;
+}*/
+
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
+
+.inputfile {
+  /* visibility: hidden etc. wont work */
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.inputfile:focus + label {
+  /* keyboard navigation */
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+.inputfile + label * {
+  pointer-events: none;
+}
+
+
+
+.ripple1 {
+    position: relative;
+    /*background-color: #4CAF50;*/
+    border: none;
+    font-size: 28px;
+    color: #FFFFFF;
+    /*padding: 20px;*/
+    width: 120px;
+    height:120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.ripple1:after {
+    border: none;
+    content: "";
+    background: gray;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.ripple1:active:after {
+    border:none;
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.ripple1:focus{
+    outline: 0 !important;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.close_add {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close_add:hover,
+.close_add:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    /*padding-top: 100px;*/ /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    /*margin: auto;*/
+    padding: 0;
+    border: 1px solid #888;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-200px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-200px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: black;
+/*    float: right;*/
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.close_add {
+    color: black;
+/*    float: right;*/
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close_add:hover,
+.close_add:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 0px 2px;
+   /* background-color: gray;*/
+    /*color: white;*/
+}
+
+.modal-body {/*width:800px;*/}
+
+.modal-footer {
+    /*padding: 0px 2px;*/
+    /*background-color: gray;*/
+    /*color: white;*/
+    margin-top: -40px;
+}
+

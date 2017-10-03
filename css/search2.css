@@ -1,0 +1,14 @@
+
+.results2 tr[visible='false'],
+.no-result2{
+  display:none;
+}
+
+.results2 tr[visible='true']{
+  display:table-row;
+}
+
+.counter{
+  padding:8px; 
+  color:#ccc;
+}
