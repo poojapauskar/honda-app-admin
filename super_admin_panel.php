@@ -43,6 +43,11 @@ if(isset($_POST['submit1'])){
   $url = 'http://127.0.0.1:8000/accounts/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
   $data = array(
               'organization' => $_POST['organization'],
+              'name' => $_POST['name'],
+              'email' => $_POST['email'],
+              'mobile' => $_POST['mobile'],
+              'username' => $_POST['username'],
+              'password' => $_POST['password']
             );
 
     $options = array(
@@ -60,45 +65,8 @@ if(isset($_POST['submit1'])){
     
 }
 ?>
-<?php
-if(isset($_POST['submit2'])){
-  $url_admin_employees = 'http://127.0.0.1:8000/add_admin_employees/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
-  $options_admin_employees = array(
-    'http' => array(
-     'header'  => array(
-                      "NAME: ".$_POST['name'],
-                      "EMAIL: ".$_POST['email'],
-                      "MOBILE: ".$_POST['mobile'],
-                      "USERNAME: ".$_POST['username'],
-                      "PASSWORD: ".$_POST['password'],
-                      "ACCESS-LEVEL: ".$_POST['access_level'],
-                      "ACCOUNT-TOKEN: ".$_POST['organization']
-                  ),
-     'method'  => 'GET',
-   ),
-  );
-  $context_admin_employees = stream_context_create($options_admin_employees);
-  $output_admin_employees = file_get_contents($url_admin_employees, false,$context_admin_employees);
 
-  $arr_admin_employees = json_decode($output_admin_employees,true);
-    
-}
-?>
 
-<?php
-$url_accounts = 'http://127.0.0.1:8000/get_all_accounts/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
-$options_accounts = array(
-  'http' => array(
-    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-    'method'  => 'GET',
-  ),
-);
-$context_accounts = stream_context_create($options_accounts);
-$output_accounts = file_get_contents($url_accounts, false,$context_accounts);
-
-$arr_accounts = json_decode($output_accounts,true);
-/*var_dump($arr_accounts['accounts'][0]);*/
-?>
 
 <?php
 $url_org_details = 'http://127.0.0.1:8000/get_org_details/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
@@ -137,29 +105,6 @@ $arr_org_details = json_decode($output_org_details,true);
       </div>
       <br>
 
-        <!-- Accent-colored raised button with ripple -->
-    <button name="submit1" id="submit1" style="background-color: #5cb85c;width:7em" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-      Save
-    </button>
-
-   <!--   <button style="background-color:#d9534f" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-      Delete
-    </button> -->
-    </form>
-
-
-<h3 style="margin-top: 9%;">Add Admin/ Employees</h3>
-    <form action="#" method="post">
-
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <label class="mdl-textfield__label" for="sample3">Organization</label>
-        <select name="organization" style="margin-left:1%;width:37%">
-         <?php for ($i=0;$i<count($arr_accounts['accounts']);$i++){ ?>
-          <option value="<?php echo $arr_accounts['accounts'][$i]['account_token']; ?>"><?php echo $arr_accounts['accounts'][$i]['organization'] ?></option>
-         <?php } ?>
-        </select>
-      </div>
-      <br>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <label class="mdl-textfield__label" for="sample3">NAME</label>
           <input name="name" id="name" class="mdl-textfield__input" type="text">
@@ -187,20 +132,9 @@ $arr_org_details = json_decode($output_org_details,true);
       <br>
       
 
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <label class="mdl-textfield__label" for="sample3">Access Level</label>
-          <select name="access_level" style="margin-left:1%;width:37%">
-            <option value="Admin">Admin</option>
-            <option value="Sales">Sales</option>
-            <option value="Insurance">Insurance</option>
-            <option value="Finance">Finance</option>
-            <option value="User">User</option>
-          </select>
-        </div>
-      <br>
 
         <!-- Accent-colored raised button with ripple -->
-    <button name="submit2" id="submit2" style="background-color: #5cb85c;width:7em" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+    <button name="submit1" id="submit1" style="background-color: #5cb85c;width:7em" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
       Save
     </button>
 
@@ -253,7 +187,7 @@ $arr_org_details = json_decode($output_org_details,true);
               
               <td>
                  <form method="post" action="edit_account.php">
-                  <input type="hidden" name="pk_value" value="<?php echo $arr_org_details[$x]['pk']; ?>">
+                  <input name="pk_value" type="hidden" value="<?php echo $arr_org_details[$x]['pk']; ?>">
                   <button style="width:55px;height:30px" type="submit" name="edit_btn">Edit</button>
                 </form> 
               </td>
