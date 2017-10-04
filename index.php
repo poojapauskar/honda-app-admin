@@ -37,6 +37,8 @@ function show_wait_msg ()
 
 <?php 
 
+session_start();
+
 if($_POST['username'] != '' && $_POST['password'] != ''){
 $url2 = 'https://hondaproject.herokuapp.com/check_admin/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
 $options2 = array(
@@ -54,7 +56,7 @@ $arr2 = json_decode($output2,true);
 /*echo $arr2['message'];*/
                   if($arr2['status']==200 && $arr2['message'] == "Is Admin"){
 
-                                            $url_logged = 'https://hondaproject.herokuapp.com/update_logged_in/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+                                            /*$url_logged = 'https://hondaproject.herokuapp.com/update_logged_in/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
                                             $options_logged = array(
                                               'http' => array(
                                                 'header'  => array(
@@ -70,10 +72,12 @@ $arr2 = json_decode($output2,true);
                                             $arr_logged = json_decode($output_logged,true);
                                             if($arr_logged['status'] == 200){
                                                 echo "<script>location='admin_panel.php'</script>";
-                                            }
+                                            }*/
+                                            $_SESSION['honda_login']=1;
+                                            echo "<script>location='admin_panel.php'</script>";
                   }
                   elseif($arr2['status']==200 && $arr2['message'] == "Is Super Admin"){
-                                            $url_logged = 'https://hondaproject.herokuapp.com/update_logged_in/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+                                            /*$url_logged = 'https://hondaproject.herokuapp.com/update_logged_in/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
                                             $options_logged = array(
                                               'http' => array(
                                                 'header'  => array(
@@ -89,7 +93,9 @@ $arr2 = json_decode($output2,true);
                                             $arr_logged = json_decode($output_logged,true);
                                             if($arr_logged['status'] == 200){
                                                 echo "<script>location='super_admin_panel.php'</script>";
-                                            }
+                                            }*/
+                                            $_SESSION['honda_login']=1;
+                                            echo "<script>location='super_admin_panel.php'</script>";
                   }else{
                     if($arr2['status']==401){
                        $error_message="Not an Admin";

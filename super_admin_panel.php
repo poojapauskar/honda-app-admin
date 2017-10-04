@@ -1,4 +1,14 @@
+<?php
+/*ob_start("ob_gzhandler");*/  //Enables Gzip compression 
 
+session_start();
+if($_SESSION['honda_login'] == 1){
+
+}else{
+  echo "<script>location='index.php'</script>";
+}
+
+?>
 <html>
   <head>
     <!-- Material Design Lite -->
@@ -21,13 +31,14 @@ label {
   </head>
   <body>
 
+
 <?php
 if(isset($_POST['delete_btn'])){
-  /*$url_delete_account = '';
+  $url_delete_account = 'https://hondaproject.herokuapp.com/delete_account/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
   $options_delete_account = array(
     'http' => array(
       'header'  => array(
-                  'PK-DELETE: '.$_POST['pk_delete'],
+                  'ACCOUNT-ID: '.$_POST['pk_delete'],
                 ),
       'method'  => 'GET',
     ),
@@ -35,12 +46,12 @@ if(isset($_POST['delete_btn'])){
   $context_delete_account = stream_context_create($options_delete_account);
   $output_delete_account = file_get_contents($url_delete_account, false,$context_delete_account);
  
-  $arr_delete_account = json_decode($output_delete_account,true);*/
+  $arr_delete_account = json_decode($output_delete_account,true);
 
 }?> 
 <?php
 if(isset($_POST['submit1'])){
-  $url = 'http://127.0.0.1:8000/accounts/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+  $url = 'https://hondaproject.herokuapp.com/accounts/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
   $data = array(
               'organization' => $_POST['organization'],
               'name' => $_POST['name'],
@@ -69,7 +80,7 @@ if(isset($_POST['submit1'])){
 
 
 <?php
-$url_org_details = 'http://127.0.0.1:8000/get_org_details/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+$url_org_details = 'https://hondaproject.herokuapp.com/get_org_details/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
 $options_org_details = array(
   'http' => array(
     'header'  => "Content-type: application/x-www-form-urlencoded\r\n",

@@ -1,3 +1,14 @@
+<?php
+/*ob_start("ob_gzhandler");*/  //Enables Gzip compression 
+
+session_start();
+if($_SESSION['honda_login'] == 1){
+
+}else{
+  echo "<script>location='index.php'</script>";
+}
+
+?>
 <head>
     <!-- Material Design Lite -->
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
@@ -24,6 +35,8 @@ label {
 </style>
   </head>
 <?php
+
+session_start();
 /*ob_start("ob_gzhandler");*/  //Enables Gzip compression 
 
 /*session_start();
@@ -38,7 +51,7 @@ if($_SESSION['login_reimburse_app'] == 1){
 
 <?php
 if(isset($_POST['submit'])){
-  $url = 'http://127.0.0.1:8000/edit_account/';
+  $url = 'https://hondaproject.herokuapp.com/edit_account/';
   $data = array(
               'pk_value' => $_POST['pk'],
               'admin_pk' => $_POST['admin_pk'],
@@ -70,40 +83,67 @@ if(isset($_POST['submit'])){
 
 <?php
 if(isset($_POST['delete_btn'])){
-  /*$url_delete_user = 'https://reimburse.herokuapp.com/delete_user/';
+  /*echo "hi";*/
+  $url_delete_user = 'https://hondaproject.herokuapp.com/disable_employee/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
   $options_delete_user = array(
     'http' => array(
       'header'  => array(
-                  'USER-ID: '.$_POST['pk_delete'],
+                  'EMPLOYEE-ID: '.$_POST['pk_delete'],
                 ),
       'method'  => 'GET',
     ),
   );
   $context_delete_user = stream_context_create($options_delete_user);
-
-  $arr_delete_user = json_decode($output_delete_user,true);*/
+  $output_delete_user = file_get_contents($url_delete_user, false,$context_delete_user);
+  $arr_delete_user = json_decode($output_delete_user,true);
 
 }?> 
 
+
+<?php
+if(isset($_POST['submit_2'])){
+  $url_admin_employees = 'https://hondaproject.herokuapp.com/add_admin_employees/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+  $options_admin_employees = array(
+    'http' => array(
+     'header'  => array(
+                      "EMPLOYEE-ID: ".$_POST['employee_id'],
+                      "NAME: ".$_POST['name'],
+                      "EMAIL: ".$_POST['email'],
+                      "MOBILE: ".$_POST['mobile'],
+                      "USERNAME: ".$_POST['username'],
+                      "PASSWORD: ".$_POST['password'],
+                      "ACCOUNT-TOKEN: ".$_SESSION['acnt_token_selected'],
+                      "ACCESS-LEVEL: ".$_POST['access_level'],
+                  ),
+     'method'  => 'GET',
+   ),
+  );
+  $context_admin_employees = stream_context_create($options_admin_employees);
+  $output_admin_employees = file_get_contents($url_admin_employees, false,$context_admin_employees);
+
+  $arr_admin_employees = json_decode($output_admin_employees,true);
+    
+}
+?>
+
 <?php
 
-session_start();
 
-/*if(isset($_POST['pk_value'])){
+if(isset($_POST['pk_value'])){
   $pk1=$_POST['pk_value'];
 }else
 {
   $pk1=$_SESSION['pk_value'];
-}*/
+}
 
-$_SESSION['pk_value']= $_POST['pk_value'];
+/*$_SESSION['pk_value']= $_POST['pk_value'];*/
 
   /*echo $_POST['pk_value'];*/
-  $url_get_account_from_id = 'http://127.0.0.1:8000/get_account_from_id/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+  $url_get_account_from_id = 'https://hondaproject.herokuapp.com/get_account_from_id/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
   $options_get_account_from_id = array(
     'http' => array(
       'header'  => array(
-                  'PK-VALUE: '.$_SESSION['pk_value'],
+                  'PK-VALUE: '.$pk1,
                 ),
       'method'  => 'GET',
     ),
@@ -156,38 +196,13 @@ $_SESSION['acnt_token_selected']= $arr_get_account_from_id['account_token'];
 </form>
 </div>
 
-<?php
-if(isset($_POST['submit_2'])){
-  $url_admin_employees = 'http://127.0.0.1:8000/add_admin_employees/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
-  $options_admin_employees = array(
-    'http' => array(
-     'header'  => array(
-                      "EMPLOYEE-ID: ".$_POST['employee_id'],
-                      "NAME: ".$_POST['name'],
-                      "EMAIL: ".$_POST['email'],
-                      "MOBILE: ".$_POST['mobile'],
-                      "USERNAME: ".$_POST['username'],
-                      "PASSWORD: ".$_POST['password'],
-                      "ACCOUNT-TOKEN: ".$_SESSION['acnt_token_selected'],
-                      "ACCESS-LEVEL: ".$_POST['access_level'],
-                  ),
-     'method'  => 'GET',
-   ),
-  );
-  $context_admin_employees = stream_context_create($options_admin_employees);
-  $output_admin_employees = file_get_contents($url_admin_employees, false,$context_admin_employees);
-
-  $arr_admin_employees = json_decode($output_admin_employees,true);
-    
-}
-?>
 
 <div class="container" style="margin-left:25%;margin-top:1%;width:50%;border:1px solid black;padding-bottom:8px">
 
 <h4 style="text-align:center">Add New User</h4>
 <form  align="center" action="#" style="margin-top:-6%;" method="post">
 
-<input class="mdl-textfield__input" type="hidden" id="pk_value" name="pk_value" value="<?php echo $_SESSION['pk_value'] ?>">
+<input class="mdl-textfield__input" type="hidden" id="pk_value_edit" name="pk_value_edit" value="<?php echo $_SESSION['pk_value'] ?>">
 <input class="mdl-textfield__input" type="hidden" id="account_token" name="account_token" value="<?php echo $_SESSION['acnt_token_selected'] ?>">
 
 <br><br>
@@ -241,7 +256,7 @@ if(isset($_POST['submit_2'])){
             <td class="mdl-data-table__cell--non-numeric"><?php echo $arr_get_account_from_id['employees'][$x]['role']; ?></td>
             <td>
                               <form method="post" action="edit_account.php">
-                                <input type="hidden" name="pk_delete" value="<?php echo $arr_get_all_users[$x]['profile'][$y]['pk'] ?>">
+                                <input type="hidden" name="pk_delete" value="<?php echo $arr_get_account_from_id['employees'][$x]['employee_details']['pk']; ?>">
                                 <button onclick="return confirm('Are you sure you want to delete?');" style="width:55px;height:30px" type="submit" name="delete_btn">Delete</button>
                                </form>
             </td>

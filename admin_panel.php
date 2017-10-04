@@ -1,3 +1,14 @@
+<?php
+/*ob_start("ob_gzhandler");*/  //Enables Gzip compression 
+
+session_start();
+if($_SESSION['honda_login'] == 1){
+
+}else{
+  echo "<script>location='index.php'</script>";
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +54,7 @@ function show_wait_msg ()
 <body ng-app="" style="overflow-x:hidden" onload="hide_wait_msg()">
 
 <?php
-$url_check_wether_login = 'https://hondaproject.herokuapp.com/update_logged_in/check/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+/*$url_check_wether_login = 'https://hondaproject.herokuapp.com/update_logged_in/check/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
 $options_check_wether_login = array(
   'http' => array(
     'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -55,7 +66,7 @@ $output_check_wether_login = file_get_contents($url_check_wether_login, false,$c
 $arr_check_wether_login = json_decode($output_check_wether_login,true);
 if($arr_check_wether_login['status'] != 200){
   echo "<script>location='index.php'</script>";
-}
+}*/
 ?>
 
 
