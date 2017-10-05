@@ -199,14 +199,14 @@ $_SESSION['acnt_token_selected']= $arr_get_account_from_id['account_token'];
 
 <div class="container" style="margin-left:25%;margin-top:1%;width:50%;border:1px solid black;padding-bottom:8px">
 
-<h4 style="text-align:center">Add New User</h4>
+<h4 style="text-align:center">Add New User/ Employee</h4>
 <form  align="center" action="#" style="margin-top:-6%;" method="post">
 
 <input class="mdl-textfield__input" type="hidden" id="pk_value_edit" name="pk_value_edit" value="<?php echo $_SESSION['pk_value'] ?>">
 <input class="mdl-textfield__input" type="hidden" id="account_token" name="account_token" value="<?php echo $_SESSION['acnt_token_selected'] ?>">
 
 <br><br>
-<input placeholder="EMPLOYEE ID" type="text" id="employee_id" name="employee_id" required/><br><br>
+<input placeholder="EMPLOYEE ID" type="text" id="employee_id" name="employee_id"/><br><br>
 <input placeholder="NAME" type="text" id="name" name="name" required/><br><br>
 <input placeholder="EMAIL" type="email" id="email" name="email" required/><br><br>
 <input placeholder="MOBILE" type="text" id="mobile" name="mobile" required/><br><br>
