@@ -73,6 +73,12 @@ if(isset($_POST['submit1'])){
     $result = file_get_contents($url, false, $context);
 
     $arr = json_decode($result,true);
+    if($arr['status']==400){
+      echo "<script type='text/javascript'>alert('Organization name already exists')</script>";
+    }
+    if($arr['status']==401){
+      echo "<script type='text/javascript'>alert('Username already exists')</script>";
+    }
     
 }
 ?>

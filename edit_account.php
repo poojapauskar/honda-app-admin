@@ -140,7 +140,9 @@ if(isset($_POST['submit_2'])){
   $output_admin_employees = file_get_contents($url_admin_employees, false,$context_admin_employees);
 
   $arr_admin_employees = json_decode($output_admin_employees,true);
-    
+  if($arr_admin_employees['status']==401){
+      echo "<script type='text/javascript'>alert('Username already exists')</script>";
+    } 
 }
 ?>
 
