@@ -99,6 +99,24 @@ if(isset($_POST['delete_btn'])){
 
 }?> 
 
+<?php
+if(isset($_POST['delete_btn_user'])){
+  /*echo "hi";*/
+  $url_delete_user = 'https://hondaproject.herokuapp.com/delete_user/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+  $options_delete_user = array(
+    'http' => array(
+      'header'  => array(
+                  'USER-ID: '.$_POST['pk_delete_user'],
+                ),
+      'method'  => 'GET',
+    ),
+  );
+  $context_delete_user = stream_context_create($options_delete_user);
+  $output_delete_user = file_get_contents($url_delete_user, false,$context_delete_user);
+  $arr_delete_user = json_decode($output_delete_user,true);
+
+}?> 
+
 
 <?php
 if(isset($_POST['submit_2'])){
@@ -228,7 +246,7 @@ $_SESSION['acnt_token_selected']= $arr_get_account_from_id['account_token'];
 </form>
 <div class="mdl-components mdl-js-components mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
 
-
+<h4 style="text-align:center">Employee Details</h4>
 <table align="center" id="example" style="box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);" class="mdl-data-table">
         <thead>
             <tr>
@@ -258,6 +276,47 @@ $_SESSION['acnt_token_selected']= $arr_get_account_from_id['account_token'];
                               <form method="post" action="edit_account.php">
                                 <input type="hidden" name="pk_delete" value="<?php echo $arr_get_account_from_id['employees'][$x]['employee_details']['pk']; ?>">
                                 <button onclick="return confirm('Are you sure you want to delete?');" style="width:55px;height:30px" type="submit" name="delete_btn">Delete</button>
+                               </form>
+            </td>
+                   
+          </tr>  
+            <?php }?>
+        </tbody>
+    </table>
+    </div>
+
+<div class="mdl-components mdl-js-components mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+
+<h4 style="text-align:center">User Details</h4>
+<table align="center" id="example" style="box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);" class="mdl-data-table">
+        <thead>
+            <tr>
+               <!--  <th class="mdl-data-table__cell--non-numeric">Employee ID</th>  -->
+                <th class="mdl-data-table__cell--non-numeric">Name</th> 
+                <th class="mdl-data-table__cell--non-numeric">Email</th>
+                <th class="mdl-data-table__cell--non-numeric">Mobile</th>
+                <th class="mdl-data-table__cell--non-numeric">Username</th>
+                <th class="mdl-data-table__cell--non-numeric">Password</th>
+               <!--  <th class="mdl-data-table__cell--non-numeric">Role</th> -->
+                <!-- <th>Edit</th> -->
+                <th class="mdl-data-table__cell--non-numeric">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        <?php for($x=0;$x<count($arr_get_account_from_id['users']);$x++){?>
+          <tr>
+          <!--   <td class="mdl-data-table__cell--non-numeric"><?php echo $arr_get_account_from_id['employees'][$x]['employee_id']; ?></td> -->
+            <td class="mdl-data-table__cell--non-numeric"><?php echo $arr_get_account_from_id['users'][$x]['user_details']['name']; ?></td>
+            <td class="mdl-data-table__cell--non-numeric"><?php echo $arr_get_account_from_id['users'][$x]['user_details']['email']; ?></td>
+            <td class="mdl-data-table__cell--non-numeric"><?php echo $arr_get_account_from_id['users'][$x]['user_details']['mobile']; ?></td>
+            <td class="mdl-data-table__cell--non-numeric"><?php echo $arr_get_account_from_id['users'][$x]['user_details']['username']; ?></td>
+            <td class="mdl-data-table__cell--non-numeric"><?php echo $arr_get_account_from_id['users'][$x]['user_details']['password']; ?></td>
+       <!--      <td class="mdl-data-table__cell--non-numeric"><?php echo $arr_get_account_from_id['employees'][$x]['role']; ?></td> -->
+            <td>
+                              <form method="post" action="edit_account.php">
+                                <input type="hidden" name="pk_delete_user" value="<?php echo $arr_get_account_from_id['users'][$x]['user_details']['pk']; ?>">
+                                <button onclick="return confirm('Are you sure you want to delete?');" style="width:55px;height:30px" type="submit" name="delete_btn_user">Delete</button>
                                </form>
             </td>
                    
