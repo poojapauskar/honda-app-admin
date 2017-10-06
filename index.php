@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Vanisha Honda</title>
+  <title>Honda</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -128,7 +128,7 @@ elseif($_POST['username'] == '' && isset($_POST['submit'])){
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
       <nav class="mdl-navigation">
-        <h5 style="color:white;">Vanisha Honda</h5>
+        <h5 style="color:white;">Honda</h5>
         <a style="visibility:hidden" href="logout.php"><img class="logout_btn" src="images/logout.png"></img></a>
       </nav>
     </div>
