@@ -12,5 +12,6 @@ $output_logged = file_get_contents($url_logged, false,$context_logged);
 
 $arr_logged = json_decode($output_logged,true);*/
 $_SESSION['honda_login']=0;
+$_SESSION['organization_account_token']='';
 echo "<script>location='index.php'</script>";
 ?>

@@ -281,18 +281,21 @@ if($_POST['search_text'] != '' || ($_POST['date11'] != '' && $_POST['date22'] !=
            $header=array(
                           'TEXT: '.$_POST['search_text'],
                           'FROM-DATE: '.$_POST['date11'],
-                          'TO-DATE: '.$_POST['date22']
+                          'TO-DATE: '.$_POST['date22'],
+                          'ACCOUNT-TOKEN: '.$_SESSION['organization_account_token']
                           );
         }
         if($_POST['date11'] != '' && $_POST['date22'] != '' && $_POST['search_text'] == ''){
             $header=array(
                           'FROM-DATE: '.$_POST['date11'],
-                          'TO-DATE: '.$_POST['date22']
+                          'TO-DATE: '.$_POST['date22'],
+                          'ACCOUNT-TOKEN: '.$_SESSION['organization_account_token']
                           );
         }
         if($_POST['search_text'] != '' && $_POST['date11'] == '' && $_POST['date22'] == ''){
            $header=array(
-                          'TEXT: '.$_POST['search_text']
+                          'TEXT: '.$_POST['search_text'],
+                          'ACCOUNT-TOKEN: '.$_SESSION['organization_account_token']
                           );
         }
 
@@ -311,7 +314,9 @@ if($_POST['search_text'] != '' || ($_POST['date11'] != '' && $_POST['date22'] !=
       $url_data = 'https://hondaproject.herokuapp.com/get_all_service_requests/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP&page='.$page;
       $options_data = array(
         'http' => array(
-          'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+          'header'  => array(
+                            "ACCOUNT-TOKEN: ".$_SESSION['organization_account_token']
+                        ),
           'method'  => 'GET',
         ),
       );

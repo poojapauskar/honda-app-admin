@@ -454,7 +454,9 @@ elseif(isset($_POST['add_emp'])){
                     'MOBILE: '.$_POST['mobile1'],
                     'USERNAME: '.$_POST['username1'],
                     'PASSWORD: '.$_POST['password1'],
-                    'ACCESS-LEVEL: '.$_POST['access_level1']
+                    'ACCESS-LEVEL: '.$_POST['access_level1'],
+                    'ACCOUNT-TOKEN: '.$_SESSION['organization_account_token'],
+                    'EMPLOYEE-ID: '.$_POST['employee_id1'],
                     ),
       'method'  => 'GET',
     ),
@@ -475,7 +477,8 @@ if($_GET['page_no'] == '' || $_GET['page_no'] == 'null'){
 if($_POST['search_text'] != ''){
 
         $header=array(
-                    'TEXT: '.$_POST['search_text']
+                    'TEXT: '.$_POST['search_text'],
+                    'ACCOUNT-TOKEN: '.$_SESSION['organization_account_token']
                     );
 
 
@@ -495,7 +498,9 @@ if($_POST['search_text'] != ''){
         $url_data = 'https://hondaproject.herokuapp.com/get_all_employees_details/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP&page='.$page;
         $options_data = array(
           'http' => array(
-            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            'header'  => array(
+                            "ACCOUNT-TOKEN: ".$_SESSION['organization_account_token']
+                        ),
             'method'  => 'GET',
           ),
         );
@@ -603,6 +608,11 @@ if($_POST['search_text'] != ''){
                 <input class="mdl-textfield__input" type="text" id="employee_id" name="employee_id">
                 </div>
  -->
+                <div class="mdl-textfield mdl-js-textfield">
+                <label style="float: left;" for="name1">Employee ID</label>
+                <input value="<?php echo $_POST['employee_id1'] ?>" class="mdl-textfield__input" type="text" id="employee_id1" name="employee_id1">
+                </div>
+
                 <div class="mdl-textfield mdl-js-textfield">
                 <label style="float: left;" for="name1">Name</label>
                 <input value="<?php echo $_POST['name1'] ?>" class="mdl-textfield__input" type="text" id="name1" name="name1">

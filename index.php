@@ -74,6 +74,7 @@ $arr2 = json_decode($output2,true);
                                                 echo "<script>location='admin_panel.php'</script>";
                                             }*/
                                             $_SESSION['honda_login']=1;
+                                            $_SESSION['organization_account_token']=$arr2['account_token'];
                                             echo "<script>location='admin_panel.php'</script>";
                   }
                   elseif($arr2['status']==200 && $arr2['message'] == "Is Super Admin"){

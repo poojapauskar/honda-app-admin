@@ -273,7 +273,9 @@ $('.date').blur(function()
         $url_list = 'https://hondaproject.herokuapp.com/get_list_to_select_specific_user/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
         $options_list = array(
           'http' => array(
-            /*'header'  => "Content-type: application/x-www-form-urlencoded\r\n",*/
+            'header'  => array(
+                            "ACCOUNT-TOKEN: ".$_SESSION['organization_account_token']
+                        ),
             'method'  => 'GET',
           ),
         );
@@ -283,63 +285,7 @@ $('.date').blur(function()
         $list_info = json_decode($output_list,true);
         /*var_dump($list_info[0]['vehicle_details']['inward_date']);*/
 ?>
-<?php
 
-if($_GET['page_no'] == '' || $_GET['page_no'] == 'null'){
-  $page=1;
-}else{
-  $page=$_GET['page_no'];
-}
-
-if($_POST['search_text'] != '' || ($_POST['date11'] != '' && $_POST['date22'] != '')){
-  
-        if($_POST['search_text'] != '' && $_POST['date11'] != '' && $_POST['date22'] != ''){
-           $header=array(
-                          'TEXT: '.$_POST['search_text'],
-                          'FROM-DATE: '.$_POST['date11'],
-                          'TO-DATE: '.$_POST['date22']
-                          );
-        }
-        if($_POST['date11'] != '' && $_POST['date22'] != '' && $_POST['search_text'] == ''){
-            $header=array(
-                          'FROM-DATE: '.$_POST['date11'],
-                          'TO-DATE: '.$_POST['date22']
-                          );
-        }
-        if($_POST['search_text'] != '' && $_POST['date11'] == '' && $_POST['date22'] == ''){
-           $header=array(
-                          'TEXT: '.$_POST['search_text']
-                          );
-        }
-
-        $url_data = 'https://hondaproject.herokuapp.com/search_push_notification/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP&page='.$page;
-        $options_data = array(
-          'http' => array(
-            'header'  => $header,
-            'method'  => 'GET',
-          ),
-        );
-        $context_data = stream_context_create($options_data);
-        $output_data = file_get_contents($url_data, false,$context_data);
-        $push_notifications_info = json_decode($output_data,true);
-
-}else{
-      
-        $url_data = 'https://hondaproject.herokuapp.com/get_all_push_notifications/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP&page='.$page;
-        $options_data = array(
-          'http' => array(
-            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-            'method'  => 'GET',
-          ),
-        );
-        $context_data = stream_context_create($options_data);
-        $output_data = file_get_contents($url_data, false,$context_data);
-        /*var_dump($output_data);*/
-        $push_notifications_info = json_decode($output_data,true);
-        /*var_dump($push_notifications_info);*/
-}
-
-?>
 
 <?php
 if(isset($_POST['pn_submit']) && !isset($_POST['select'])){
@@ -384,6 +330,7 @@ if(isset($_POST['pn_submit']) && !isset($_POST['select'])){
                   'TO-ID: '.$_POST['to_id'],
                   'TEMPLATE: '.$_POST['template'],
                   'CUSTOMIZED: '.$_POST['customized'],
+                  'ACCOUNT-TOKEN: '.$_SESSION['organization_account_token']
                 ),
       'method'  => 'GET',
     ),
@@ -406,6 +353,69 @@ if(isset($_POST['list_submit'])){
   });
   </script>";
 }
+?>
+
+<?php
+
+if($_GET['page_no'] == '' || $_GET['page_no'] == 'null'){
+  $page=1;
+}else{
+  $page=$_GET['page_no'];
+}
+
+if($_POST['search_text'] != '' || ($_POST['date11'] != '' && $_POST['date22'] != '')){
+  
+        if($_POST['search_text'] != '' && $_POST['date11'] != '' && $_POST['date22'] != ''){
+           $header=array(
+                          'TEXT: '.$_POST['search_text'],
+                          'FROM-DATE: '.$_POST['date11'],
+                          'TO-DATE: '.$_POST['date22'],
+                          'ACCOUNT-TOKEN: '.$_SESSION['organization_account_token']
+                          );
+        }
+        if($_POST['date11'] != '' && $_POST['date22'] != '' && $_POST['search_text'] == ''){
+            $header=array(
+                          'FROM-DATE: '.$_POST['date11'],
+                          'TO-DATE: '.$_POST['date22'],
+                          'ACCOUNT-TOKEN: '.$_SESSION['organization_account_token']
+                          );
+        }
+        if($_POST['search_text'] != '' && $_POST['date11'] == '' && $_POST['date22'] == ''){
+           $header=array(
+                          'TEXT: '.$_POST['search_text'],
+                          'ACCOUNT-TOKEN: '.$_SESSION['organization_account_token']
+                          );
+        }
+
+        $url_data = 'https://hondaproject.herokuapp.com/search_push_notification/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP&page='.$page;
+        $options_data = array(
+          'http' => array(
+            'header'  => $header,
+            'method'  => 'GET',
+          ),
+        );
+        $context_data = stream_context_create($options_data);
+        $output_data = file_get_contents($url_data, false,$context_data);
+        $push_notifications_info = json_decode($output_data,true);
+
+}else{
+      
+        $url_data = 'https://hondaproject.herokuapp.com/get_all_push_notifications/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP&page='.$page;
+        $options_data = array(
+          'http' => array(
+            'header'  => array(
+                            "ACCOUNT-TOKEN: ".$_SESSION['organization_account_token']
+                        ),
+            'method'  => 'GET',
+          ),
+        );
+        $context_data = stream_context_create($options_data);
+        $output_data = file_get_contents($url_data, false,$context_data);
+        /*var_dump($output_data);*/
+        $push_notifications_info = json_decode($output_data,true);
+        /*var_dump($push_notifications_info);*/
+}
+
 ?>
 
 <!-- <div class="form-group pull-right">
