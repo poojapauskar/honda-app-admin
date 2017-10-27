@@ -270,6 +270,116 @@ $('.date').blur(function()
 
 <?php
 
+if(isset($_POST['add_vehicle'])){
+
+session_start();
+  $url = 'https://hondaproject.herokuapp.com/vehicle_inventory/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+
+  $data = array('account_token' => $_SESSION['organization_account_token'],
+                'batch_no' => $_POST['batch_no'],
+                'colour' => $_POST['colour'],
+                'description' => $_POST['description'],
+                'price' => $_POST['price'],
+                'engine_displacement' => $_POST['eng_disp'],
+                'power' => $_POST['power'],
+                'torque' => $_POST['torque'],
+                'mileage' => $_POST['mileage'],
+                'length' => $_POST['length'],
+                'width' => $_POST['width'],
+                'height' => $_POST['height'],
+                'front_suspension' => $_POST['front_susp'],
+                'rear_suspension' => $_POST['rear_susp'],
+                'wheel_base' => $_POST['wheel_base'],
+                'ground_clearance' => $_POST['grnd_clear'],
+                'kerb_tank' => $_POST['kerb_tank'],
+                'fuel_tank_capacity' => $_POST['fuel_cap'],
+                'engine_type' => $_POST['eng_typ'],
+                'bore' => $_POST['bore'],
+                'stroke' => $_POST['stroke'],
+                'compression_ratio' => $_POST['comp_ratio'],
+                'valve_system' => $_POST['val_sys'],
+                'no_of_gears' => $_POST['no_gears'],
+                'gear_pattern' => $_POST['gear_pat'],
+                'max_speed' => $_POST['max_speed'],
+                'tyre_size_front' => $_POST['tyre_size_front'],
+                'tyre_size_rear' => $_POST['tyre_size_rear'],
+                'tyre_type_front' => $_POST['tyre_type_front'],
+                'tyre_type_rear' => $_POST['tyre_type_rear'],
+                'brake_type_size_front' => $_POST['brake_type_front'],
+                'brake_type_size_rear' => $_POST['brake_type_rear'],
+                'frame_type' => $_POST['frame_type'],
+                'frame_type_front' => $_POST['frame_type_front'],
+                'frame_type_rear' => $_POST['frame_type_rear'],
+                'battery' => $_POST['battery'],
+                'head_lamp' => $_POST['head_lamp'],
+                'type_id' => $_POST['typ_id'],
+                'v_id' => $_POST['v_id'],
+                'vehicle_code' => $_POST['veh_code'],
+                'vehicle' => $_POST['vehicle'],
+                'vehicle_type' => $_POST['veh_typ'],
+                'engine_no' => $_POST['eng_no'],
+                'chassis_no' => $_POST['chassis_no'],
+                'invoice_no' => $_POST['inv_no'],
+                'inward_date' => $_POST['inw_date'],
+                'specification' => $_POST['spec'],
+                'reg_no' => $_POST['reg_no']
+                );
+  $options = array(
+    'http' => array(
+      'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+      'method'  => 'POST',
+      'content' => http_build_query($data),
+    ),
+  );
+  $context  = stream_context_create($options);
+  $result = file_get_contents($url, false, $context);
+ 
+
+
+require 'Cloudinary.php';
+require 'Uploader.php';
+require 'Api.php';
+
+\Cloudinary::config(array( 
+  "cloud_name" => "hdccr1s1j", 
+  "api_key" => "219691739346645", 
+  "api_secret" => "xvNdA4XHLveENkYKCgbxEN1SqkM" 
+));
+
+$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+$charactersLength = strlen($characters);
+$randomString = '';
+
+
+for ($i = 0; $i < 6; $i++) {
+    $randomString .= $characters[rand(0, $charactersLength - 1)];
+}
+$randomString='id'.$randomString;
+
+
+\Cloudinary\Uploader::upload($_FILES["fileToUpload"]["tmp_name"],
+    array(
+       "public_id" => "honda/".$randomString
+    ));
+
+
+$url_img = 'https://hondaproject.herokuapp.com/save_vehicle_images/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+
+$options_img = array(
+  'http' => array(
+    'header'  => array(
+                   'V-ID: '.$_POST['v_id'],
+                   'LINK: '.$randomString
+                 ),
+    'method'  => 'GET',
+  ),
+);
+  $context_img  = stream_context_create($options_img);
+  $result_img = file_get_contents($url_img, false, $context_img);
+
+
+
+}
 
 ?>
 
