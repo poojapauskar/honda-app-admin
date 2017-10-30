@@ -43,7 +43,10 @@ if($_SESSION['honda_login'] == 1){
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+<!-- modal -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- export -->
 <!-- <link rel="stylesheet" href="css/datatable.css"> -->
 <!-- <script src="js/jquery1.js"></script> -->
@@ -63,6 +66,21 @@ function show_wait_msg ()
 }
 
 </script>
+<style type="text/css">
+  .mdl-textfield {
+    position: relative;
+    font-size: 16px;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 400px;
+    max-width: 105%;
+    margin: 0;
+    padding: 20px 0;
+}
+button.close{
+  color: black!important;
+}
+</style>
 </head>
 <body ng-app="" style="background-color:#E8E8E8;overflow-x:hidden" onload="hide_wait_msg()">
 
@@ -527,10 +545,25 @@ $arr_types = json_decode($output_types,true);
   </ul>
 
 </div>
- 
 
-<h6 style="text-align:center;color: #607D8B !important;">Add New Inventory</h6>
-<form enctype="multipart/form-data" action="inventory.php" method="post" style="margin: 0 auto;background-color:white;width:300px;padding:2px 10px 10px 10px">
+
+<!-- Trigger the modal with a button -->
+<center>
+<button type="button" class="btn btn-info btn-lg" style="background-color: #607D8B" data-toggle="modal" data-target="#myModal">Add New Inventory</button></center>
+
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width:100%">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add New Inventory</h4>
+        </div>
+        <div class="modal-body" >
+        <!-- <center> -->
+         <form enctype="multipart/form-data" action="inventory.php" method="post">
         
             <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input value="" class="mdl-textfield__input" type="text" id="vehicle" name="vehicle" required>
@@ -774,7 +807,6 @@ $arr_types = json_decode($output_types,true);
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Vehicle code</label>
           </div>
 
-          
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
            <input value="" class="mdl-textfield__input" type="text" id="spec" name="spec">
@@ -785,14 +817,22 @@ $arr_types = json_decode($output_types,true);
            <input value="" class="mdl-textfield__input" type="text" id="reg_no" name="reg_no">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Reg no</label>
           </div>
+          <br>
 
-        
-       <button type="submit" name="add_vehicle" name="add_vehicle" style="background-color: #607D8B !important;">Add Inventory</button>
+        <center>
+       <button type="submit" name="add_vehicle" name="add_vehicle" style="background-color: #607D8B !important;">Add Inventory</button></center>
 
       </form>
-
-
-
+    
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+      
+    </div>
+  </div>
+ 
 </body>
 </html>
 
