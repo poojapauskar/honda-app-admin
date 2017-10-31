@@ -524,7 +524,7 @@ if($_POST['search_text'] != '' || ($_POST['date11'] != '' && $_POST['date22'] !=
       );
       $context_data = stream_context_create($options_data);
       $output_data = file_get_contents($url_data, false,$context_data);
-      /*var_dump($output_data);*/
+      // var_dump($output_data);
       $inventory_info = json_decode($output_data,true);
       /*var_dump($inventory_info);*/
 }
@@ -603,7 +603,7 @@ $arr_types = json_decode($output_types,true);
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="" class="mdl-textfield__input" type="text" id="v_id_edit" name="v_id_edit" required>
+           <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['v_id']  ?>" class="mdl-textfield__input" type="text" id="v_id_edit" name="v_id_edit" required>
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">V id</label>
           </div>
 
@@ -649,7 +649,7 @@ $arr_types = json_decode($output_types,true);
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="colour_edit" name="colour_edit">
+            <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['colour']  ?>" class="mdl-textfield__input" type="text" id="colour_edit" name="colour_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Colour</label>
           </div>
 
@@ -856,7 +856,7 @@ $arr_types = json_decode($output_types,true);
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="" class="mdl-textfield__input" type="text" id="reg_no_edit" name="reg_no_edit">
+           <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['reg_no']  ?>" class="mdl-textfield__input" type="text" id="reg_no_edit" name="reg_no_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Reg no</label>
           </div>
 
