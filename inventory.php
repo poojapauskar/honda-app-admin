@@ -141,10 +141,10 @@ if($arr_check_wether_login['status'] != 200){
 </div>
   
 <div class="container">
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" style="background-color: #607D8B;position:absolute;margin-top: 161px;margin-left: 7%;" data-toggle="modal" data-target="#myModal">Add New Inventory</button>
+
   <div class="row" id="row1" style="margin: auto;background-color:#607D8B;height:80px;">
-
-    
-
     <div class="col-sm-1" style="margin-top:3%;">
       <h6 style="margin-top:0%;">Insurance</h6>
     </div>
@@ -846,10 +846,6 @@ $arr_types = json_decode($output_types,true);
 
 </div>
 
-
-<!-- Trigger the modal with a button -->
-<center>
-<button type="button" class="btn btn-info btn-lg" style="background-color: #607D8B" data-toggle="modal" data-target="#myModal">Add New Inventory</button></center>
 
  <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
