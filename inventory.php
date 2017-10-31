@@ -525,21 +525,16 @@ $arr_types = json_decode($output_types,true);
               <form enctype="multipart/form-data" action="inventory.php" method="post">
         
             <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['vehicle']  ?>" class="mdl-textfield__input" type="text" id="vehicle" name="vehicle" required>
+            <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['vehicle']  ?>" class="mdl-textfield__input" type="text" id="vehicle_edit" name="vehicle_edit" required>
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Vehicle</label>
           </div>
 
-        <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <select style="" class="mdl-selectfield__select"  name="typ_id" id="typ_id">
-          <option>bike</option>
-          <option>pleasure</option>
-          </select>
-          </div>
+        
 
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="" class="mdl-textfield__input" type="text" id="v_id" name="v_id" required>
+           <input value="" class="mdl-textfield__input" type="text" id="v_id_edit" name="v_id_edit" required>
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">V id</label>
           </div>
 
@@ -550,53 +545,53 @@ $arr_types = json_decode($output_types,true);
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="veh_typ" name="veh_typ">
+            <input value="" class="mdl-textfield__input" type="text" id="veh_typ_edit" name="veh_typ_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">Vehicle type</label>
           </div>
           
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['engine_no']?>" class="mdl-textfield__input" type="text" id="eng_no" name="eng_no">
+           <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['engine_no']?>" class="mdl-textfield__input" type="text" id="eng_no_edit" name="eng_no_edit">
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">Engine no</label>
           </div>
 
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['chassis_no'] ?>" class="mdl-textfield__input" type="text" id="chassis_no" name="chassis_no">
+           <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['chassis_no'] ?>" class="mdl-textfield__input" type="text" id="chassis_no_edit" name="chassis_no_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Chassis no</label>
           </div>
           
             <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['invoice_no']?>" class="mdl-textfield__input" type="text" id="inv_no" name="inv_no">
+            <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['invoice_no']?>" class="mdl-textfield__input" type="text" id="inv_no_edit" name="inv_no_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Invoice no</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['inward_date'] ?> " class="mdl-textfield__input" type="text" id="inw_date" name="inw_date">
+           <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['inward_date'] ?> " class="mdl-textfield__input" type="text" id="inw_date_edit" name="inw_date_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">Inward date</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="batch_no" name="batch_no">
+            <input value="" class="mdl-textfield__input" type="text" id="batch_no_edit" name="batch_no_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Batch no.</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="colour" name="colour">
+            <input value="" class="mdl-textfield__input" type="text" id="colour_edit" name="colour_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Colour</label>
           </div>
 
            <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="description" name="description">
+            <input value="" class="mdl-textfield__input" type="text" id="description_edit" name="description_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">Description</label>
           </div>
 
           <br>
            <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="price" name="price">
+            <input value="" class="mdl-textfield__input" type="text" id="price_edit" name="price_edit">
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">Price</label>
           </div>
 
@@ -607,44 +602,44 @@ $arr_types = json_decode($output_types,true);
 
           <br>
            <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="power" name="power">
+            <input value="" class="mdl-textfield__input" type="text" id="power_edit" name="power_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Power</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="torque" name="torque">
+            <input value="" class="mdl-textfield__input" type="text" id="torque_edit" name="torque_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">Torque</label>
           </div>
           <br>
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="mileage" name="mileage">
+            <input value="" class="mdl-textfield__input" type="text" id="mileage_edit" name="mileage_edit">
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">Mileage</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="" class="mdl-textfield__input" type="text" id="length" name="length">
+           <input value="" class="mdl-textfield__input" type="text" id="length_edit" name="length_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Length</label>
           </div>
 
           <br>
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="width" name="width">
+            <input value="" class="mdl-textfield__input" type="text" id="width_edit" name="width_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Width</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="" class="mdl-textfield__input" type="text" id="height" name="height">
+           <input value="" class="mdl-textfield__input" type="text" id="height_edit" name="height_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">Height</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="front_susp" name="front_susp">
+            <input value="" class="mdl-textfield__input" type="text" id="front_susp_edit" name="front_susp_edit">
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">Front suspension</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="rear_susp" name="rear_susp">
+            <input value="" class="mdl-textfield__input" type="text" id="rear_susp_edit" name="rear_susp_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Rear suspension</label>
           </div>
           <br>
@@ -655,144 +650,144 @@ $arr_types = json_decode($output_types,true);
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="grnd_clear" name="grnd_clear">
+            <input value="" class="mdl-textfield__input" type="text" id="grnd_clear_edit" name="grnd_clear_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">Ground clearance</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="kerb_tank" name="kerb_tank">
+            <input value="" class="mdl-textfield__input" type="text" id="kerb_tank_edit" name="kerb_tank_edit">
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">Kerb tank</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="fuel_cap" name="fuel_cap">
+            <input value="" class="mdl-textfield__input" type="text" id="fuel_cap_edit" name="fuel_cap_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Fuel tank capacity</label>
           </div>
           <br>
 
             <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="eng_typ" name="eng_typ">
+            <input value="" class="mdl-textfield__input" type="text" id="eng_typ_edit" name="eng_typ_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Engine type</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="bore" name="bore">
+            <input value="" class="mdl-textfield__input" type="text" id="bore_edit" name="bore_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">Bore</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="stroke" name="stroke">
+            <input value="" class="mdl-textfield__input" type="text" id="stroke_edit" name="stroke_edit">
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">Stroke</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="comp_ratio" name="comp_ratio">
+            <input value="" class="mdl-textfield__input" type="text" id="comp_ratio_edit" name="comp_ratio_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Compression ratio</label>
           </div>
           <br>
 
             <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="val_sys" name="val_sys">
+            <input value="" class="mdl-textfield__input" type="text" id="val_sys_edit" name="val_sys_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Valve system</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="no_gears" name="no_gears">
+            <input value="" class="mdl-textfield__input" type="text" id="no_gears_edit" name="no_gears_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">No of gears</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="gear_pat" name="gear_pat">
+            <input value="" class="mdl-textfield__input" type="text" id="gear_pat_edit" name="gear_pat_edit">
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">Gear pattern</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="max_speed" name="max_speed">
+            <input value="" class="mdl-textfield__input" type="text" id="max_speed_edit" name="max_speed_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Max speed</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="tyre_size_frnt" name="tyre_size_frnt">
+            <input value="" class="mdl-textfield__input" type="text" id="tyre_size_frnt_edit" name="tyre_size_frnt_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Tyre size front</label>
           </div>
 
             <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="tyre_size_rear" name="tyre_size_rear">
+            <input value="" class="mdl-textfield__input" type="text" id="tyre_size_rear_edit" name="tyre_size_rear_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Tyre size rear</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="tyre_type_front" name="tyre_type_front">
+            <input value="" class="mdl-textfield__input" type="text" id="tyre_type_front_edit" name="tyre_type_front_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">Tyre type front</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="tyre_type_rear" name="tyre_type_rear">
+            <input value="" class="mdl-textfield__input" type="text" id="tyre_type_rear_edit" name="tyre_type_rear_edit">
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">Tyre type rear</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="brake_type_front" name="brake_type_front">
+            <input value="" class="mdl-textfield__input" type="text" id="brake_type_front_edit" name="brake_type_front_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Brake type size front</label>
           </div>
 
 
             <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="brake_type_rear" name="brake_type_rear">
+            <input value="" class="mdl-textfield__input" type="text" id="brake_type_rear_edit" name="brake_type_rear_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Brake type size rear</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="frame_type" name="frame_type">
+            <input value="" class="mdl-textfield__input" type="text" id="frame_type_edit" name="frame_type_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">Frame type</label>
           </div>
 
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="frame_type_front" name="frame_type_front">
+            <input value="" class="mdl-textfield__input" type="text" id="frame_type_front_edit" name="frame_type_front_edit">
             <label class="mdl-textfield__label" for="email" style="color:#cccccc;">Frame type front</label>
           </div>
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="" class="mdl-textfield__input" type="text" id="frame_type_rear" name="frame_type_rear">
+           <input value="" class="mdl-textfield__input" type="text" id="frame_type_rear_edit" name="frame_type_rear_edit">
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">Frame type rear</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="battery" name="battery">
+            <input value="" class="mdl-textfield__input" type="text" id="battery_edit" name="battery_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Battery</label>
           </div>
           <br>
 
             <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="head_lamp" name="head_lamp">
+            <input value="" class="mdl-textfield__input" type="text" id="head_lamp_edit" name="head_lamp_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Head lamp</label>
           </div>
 
 
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="" class="mdl-textfield__input" type="text" id="veh_code" name="veh_code">
+           <input value="" class="mdl-textfield__input" type="text" id="veh_code_edit" name="veh_code_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Vehicle code</label>
           </div>
           <br>
 
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="" class="mdl-textfield__input" type="text" id="spec" name="spec">
+           <input value="" class="mdl-textfield__input" type="text" id="spec_edit" name="spec_edit">
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">Specification</label>
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="" class="mdl-textfield__input" type="text" id="reg_no" name="reg_no">
+           <input value="" class="mdl-textfield__input" type="text" id="reg_no_edit" name="reg_no_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Reg no</label>
           </div>
 
@@ -800,7 +795,7 @@ $arr_types = json_decode($output_types,true);
           <br>
 
         <center>
-       <button type="submit" name="add_vehicle" name="add_vehicle" class="btn-success" style="background-color: #607D8B !important;">Add Inventory</button></center>
+       <button type="submit" name="edit" class="btn-success" style="background-color: #607D8B !important;">Save</button></center>
 
       </form>
           </div>
