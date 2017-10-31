@@ -1182,7 +1182,7 @@ $arr_types = json_decode($output_types,true);
           <br>
 
         <center>
-       <button type="submit" name="add_vehicle" name="add_vehicle" class="btn-success" style="background-color: #607D8B !important;">Add Inventory</button></center>
+       <button type="submit" name="add_vehicle" name="add_vehicle" class="btn btn-sm btn-primary" style="background-color: #607D8B !important;">Add Inventory</button></center>
 
       </form>
     
