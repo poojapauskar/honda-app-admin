@@ -619,8 +619,6 @@ $arr_types = json_decode($output_types,true);
                   </select>
           </div>
 
-        
-
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -633,7 +631,6 @@ $arr_types = json_decode($output_types,true);
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> <button class="btn btn-sm btn-primary add_more_buttons">Add More Fields</button></div>
       </div>
     </div>
-
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -1219,7 +1216,9 @@ $arr_types = json_decode($output_types,true);
   </div>
  
 </body>
+
 <!-- new inventory -->
+
 <script>
     $(document).ready(function() {
     var max_fields_limit      = 10; //set limit for maximum input fields
@@ -1236,7 +1235,9 @@ $arr_types = json_decode($output_types,true);
     })
 });
 </script>
-<!-- edit page -->
+
+<!-- edit form -->
+
 <script>
     $(document).ready(function() {
     var max_fields_limit      = 10; //set limit for maximum input fields
@@ -1245,7 +1246,8 @@ $arr_types = json_decode($output_types,true);
         e.preventDefault();
         if(x < max_fields_limit){ //check conditions
             x++; //counter increment
-            $('.input_fields_containers').append('<div><div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload[]" id="fileToUpload"></div><a href="#" class="remove_field" style="margin-left:7%"><img src="images/del24.png"></a></div>'); //add input field
+            $('.input_fields_containers').append('<div><div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload[]" id="fileToUpload" required></div><a href="#" class="remove_field" style="margin-left:7%"><img src="images/del24.png"></a></div>'); //add input field
+
         }
     });  
     $('.input_fields_containers').on("click",".remove_field", function(e){ //user click on remove text links
