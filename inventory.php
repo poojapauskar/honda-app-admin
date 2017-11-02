@@ -628,7 +628,7 @@ $arr_types = json_decode($output_types,true);
             <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">V id</label>
           </div>
 
-          <div class="input_fields_container">
+          <div class="input_fields_containers">
       <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload_edit" id="fileToUpload_edit" required></div>
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> <button class="btn btn-sm btn-primary add_more_buttons">Add More Fields</button></div>
       </div>
