@@ -524,7 +524,7 @@ if($_POST['search_text'] != '' || ($_POST['date11'] != '' && $_POST['date22'] !=
       );
       $context_data = stream_context_create($options_data);
       $output_data = file_get_contents($url_data, false,$context_data);
-      // var_dump($output_data);
+       var_dump($output_data);
       $inventory_info = json_decode($output_data,true);
       /*var_dump($inventory_info);*/
 }
