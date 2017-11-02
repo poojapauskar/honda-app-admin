@@ -401,6 +401,73 @@ $options_img = array(
 
 ?>
 
+<?php
+if(isset($_POST['edit_vehicle'])){
+  $url = 'https://hondaproject.herokuapp.com/edit_vehicle_inventory/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+  $data = array(
+              'pk_value' => $_POST['pk'],
+              'batch_no' => $_POST['username'],
+              'colour' => $_POST['password'],'pk_value' => $_POST['pk'],
+              'description' => $_POST['username'],
+              'price' => $_POST['password'],
+              'engine_displacementg' => $_POST['pk'],
+              'power' => $_POST['username'],
+              'torque' => $_POST['password'],
+              'mileage' => $_POST['pk'],
+              'length' => $_POST['username'],
+              'width' => $_POST['password'],
+              'height' => $_POST['pk'],
+              'front_suspension' => $_POST['username'],
+              'rear_suspension' => $_POST['password'],
+              'wheel_base' => $_POST['pk'],
+              'ground_clearance' => $_POST['username'],
+              'kerb_tank' => $_POST['password'],
+              'fuel_tank_capacity' => $_POST['pk'],
+              'engine_type' => $_POST['username'],
+              'bore' => $_POST['password'],
+              'stroke' => $_POST['pk'],
+              'compression_ratio' => $_POST['username'],
+              'valve_system' => $_POST['password'],
+              'no_of_gears' => $_POST['pk'],
+              'gear_pattern' => $_POST['username'],
+              'max_speed' => $_POST['password'],
+              'tyre_size_front' => $_POST['pk'],
+              'tyre_size_rear' => $_POST['username'],
+              'brake_type_size_front' => $_POST['password'],
+              'brake_type_size_rear' => $_POST['pk'],
+              'frame_type' => $_POST['username'],
+              'frame_type_front' => $_POST['password'],
+              'frame_type_rear' => $_POST['pk'],
+              'battery' => $_POST['username'],
+              'head_lamp' => $_POST['password'],
+              'type_id' => $_POST['pk'],
+              'vehicle_code' => $_POST['username'],
+              'vehicle' => $_POST['password'],
+              'vehicle_type' => $_POST['pk'],
+              'engine_no' => $_POST['username'],
+              'chassis_no' => $_POST['password'],
+              'invoice_no' => $_POST['password'],
+              'inward_date' => $_POST['pk'],
+              'specification' => $_POST['username'],
+              'reg_no' => $_POST['password']
+            );
+
+    // use key 'http' even if you send the request to https://...
+    $options = array(
+      'http' => array(
+        'header'  => "Content-Type: application/json\r\n" .
+                     "Accept: application/json\r\n",
+        'method'  => 'POST',
+        'content' => json_encode( $data ),
+      ),
+    );
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    /*echo $result8;*/
+    $arr = json_decode($result,true);
+    
+}
+?>
 
 <?php
 
@@ -523,6 +590,8 @@ $arr_types = json_decode($output_types,true);
               </div>
               <div class="modal-body">
               <form enctype="multipart/form-data" action="inventory.php" method="post">
+
+          <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['pk']  ?>" class="mdl-textfield__input" type="hidden" id="pk_value_edit" name="pk_value_edit">
         
             <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['vehicle']  ?>" class="mdl-textfield__input" type="text" id="vehicle_edit" name="vehicle_edit" required>
@@ -596,7 +665,7 @@ $arr_types = json_decode($output_types,true);
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="eng_disp" name="eng_disp">
+            <input value="" class="mdl-textfield__input" type="text" id="eng_disp_edit" name="eng_disp_edit">
             <label class="mdl-textfield__label" for="address" style="color:#cccccc;">Engine displacement</label>
           </div>
 
@@ -645,7 +714,7 @@ $arr_types = json_decode($output_types,true);
           <br>
 
            <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input value="" class="mdl-textfield__input" type="text" id="wheel_base" name="wheel_base">
+            <input value="" class="mdl-textfield__input" type="text" id="wheel_base_edit" name="wheel_base_edit">
             <label class="mdl-textfield__label" for="name" style="color:#cccccc;">Wheel base</label>
           </div>
 
@@ -795,7 +864,7 @@ $arr_types = json_decode($output_types,true);
           <br>
 
         <center>
-       <button type="submit" name="edit" class="btn-success" style="background-color: #607D8B !important;">Save</button></center>
+       <button type="submit" name="edit_vehicle" id="edit_vehicle" class="btn-success" style="background-color: #607D8B !important;">Save</button></center>
 
       </form>
           </div>
