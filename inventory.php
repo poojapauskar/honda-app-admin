@@ -291,6 +291,7 @@ $('.date').blur(function()
 if(isset($_POST['add_vehicle'])){
 
 session_start();
+  $_SESSION['new_v_id']= $_POST['v_id'];
   $url = 'https://hondaproject.herokuapp.com/vehicle_inventory/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
 
   $data = array('account_token' => $_SESSION['organization_account_token'],
@@ -351,51 +352,60 @@ session_start();
   );
   $context  = stream_context_create($options);
   $result = file_get_contents($url, false, $context);
- 
 
 
-require 'Cloudinary.php';
-require 'Uploader.php';
-require 'Api.php';
+ /*echo count($_FILES['fileToUpload']);
+ echo count($_FILES['fileToUpload']['name']);*/
 
-\Cloudinary::config(array( 
-  "cloud_name" => "hdccr1s1j", 
-  "api_key" => "219691739346645", 
-  "api_secret" => "xvNdA4XHLveENkYKCgbxEN1SqkM" 
-));
-
-$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-$charactersLength = strlen($characters);
-$randomString = '';
+  require 'Cloudinary.php';
+  require 'Uploader.php';
+  require 'Api.php';
 
 
-for ($i = 0; $i < 6; $i++) {
-    $randomString .= $characters[rand(0, $charactersLength - 1)];
-}
-$randomString='id'.$randomString;
+  \Cloudinary::config(array( 
+          "cloud_name" => "hdccr1s1j", 
+          "api_key" => "219691739346645", 
+          "api_secret" => "xvNdA4XHLveENkYKCgbxEN1SqkM" 
+        ));
+
+  for($k=0; $k<count($_FILES['fileToUpload']['name']);$k++){
+    /*echo "hi";
+    echo $_FILES["fileToUpload"]['tmp_name'][$k];*/
+        
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
 
 
-\Cloudinary\Uploader::upload($_FILES["fileToUpload"]["tmp_name"],
-    array(
-       "public_id" => "honda/".$randomString
-    ));
+        for ($i = 0; $i < 6; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        $randomString='id'.$randomString;
+        
+
+        \Cloudinary\Uploader::upload($_FILES["fileToUpload"]["tmp_name"][$k],
+            array(
+               "public_id" => "honda/".$randomString
+            ));
 
 
-$url_img = 'https://hondaproject.herokuapp.com/save_vehicle_images/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
-
-$options_img = array(
-  'http' => array(
-    'header'  => array(
-                   'V-ID: '.$_POST['v_id'],
-                   'LINK: '.$randomString
-                 ),
-    'method'  => 'GET',
-  ),
-);
-  $context_img  = stream_context_create($options_img);
-  $result_img = file_get_contents($url_img, false, $context_img);
+        $url_img = 'https://hondaproject.herokuapp.com/save_vehicle_images/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
 
 
+        $options_img = array(
+          'http' => array(
+            'header'  => array(
+                           'V-ID: '.$_SESSION['new_v_id'],
+                           'LINK: '.$randomString
+                         ),
+            'method'  => 'GET',
+          ),
+        );
+          $context_img  = stream_context_create($options_img);
+          $result_img = file_get_contents($url_img, false, $context_img);
+
+  }
 
 }
 
@@ -405,51 +415,53 @@ $options_img = array(
 if(isset($_POST['edit_vehicle'])){
   $url = 'https://hondaproject.herokuapp.com/edit_vehicle_inventory/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
   $data = array(
-              'pk_value' => $_POST['pk'],
-              'batch_no' => $_POST['username'],
-              'colour' => $_POST['password'],'pk_value' => $_POST['pk'],
-              'description' => $_POST['username'],
-              'price' => $_POST['password'],
-              'engine_displacementg' => $_POST['pk'],
-              'power' => $_POST['username'],
-              'torque' => $_POST['password'],
-              'mileage' => $_POST['pk'],
-              'length' => $_POST['username'],
-              'width' => $_POST['password'],
-              'height' => $_POST['pk'],
-              'front_suspension' => $_POST['username'],
-              'rear_suspension' => $_POST['password'],
-              'wheel_base' => $_POST['pk'],
-              'ground_clearance' => $_POST['username'],
-              'kerb_tank' => $_POST['password'],
-              'fuel_tank_capacity' => $_POST['pk'],
-              'engine_type' => $_POST['username'],
-              'bore' => $_POST['password'],
-              'stroke' => $_POST['pk'],
-              'compression_ratio' => $_POST['username'],
-              'valve_system' => $_POST['password'],
-              'no_of_gears' => $_POST['pk'],
-              'gear_pattern' => $_POST['username'],
-              'max_speed' => $_POST['password'],
-              'tyre_size_front' => $_POST['pk'],
-              'tyre_size_rear' => $_POST['username'],
-              'brake_type_size_front' => $_POST['password'],
-              'brake_type_size_rear' => $_POST['pk'],
-              'frame_type' => $_POST['username'],
-              'frame_type_front' => $_POST['password'],
-              'frame_type_rear' => $_POST['pk'],
-              'battery' => $_POST['username'],
-              'head_lamp' => $_POST['password'],
-              'type_id' => $_POST['pk'],
-              'vehicle_code' => $_POST['username'],
-              'vehicle' => $_POST['password'],
-              'vehicle_type' => $_POST['pk'],
-              'engine_no' => $_POST['username'],
-              'chassis_no' => $_POST['password'],
-              'invoice_no' => $_POST['password'],
-              'inward_date' => $_POST['pk'],
-              'specification' => $_POST['username'],
-              'reg_no' => $_POST['password']
+              'pk_value' => $_POST['pk_value_edit'],
+              'batch_no' => $_POST['batch_no_edit'],
+              'colour' => $_POST['colour_edit'],
+              'description' => $_POST['description_edit'],
+              'price' => $_POST['price_edit'],
+              'engine_displacement' => $_POST['eng_disp_edit'],
+              'power' => $_POST['power_edit'],
+              'torque' => $_POST['torque_edit'],
+              'mileage' => $_POST['mileage_edit'],
+              'length' => $_POST['length_edit'],
+              'width' => $_POST['width_edit'],
+              'height' => $_POST['height_edit'],
+              'front_suspension' => $_POST['front_susp_edit'],
+              'rear_suspension' => $_POST['rear_susp_edit'],
+              'wheel_base' => $_POST['wheel_base_edit'],
+              'ground_clearance' => $_POST['grnd_clear_edit'],
+              'kerb_tank' => $_POST['kerb_tank_edit'],
+              'fuel_tank_capacity' => $_POST['fuel_cap_edit'],
+              'engine_type' => $_POST['eng_typ_edit'],
+              'bore' => $_POST['bore_edit'],
+              'stroke' => $_POST['stroke_edit'],
+              'compression_ratio' => $_POST['comp_ratio_edit'],
+              'valve_system' => $_POST['val_sys_edit'],
+              'no_of_gears' => $_POST['no_gears_edit'],
+              'gear_pattern' => $_POST['gear_pat_edit'],
+              'max_speed' => $_POST['max_speed_edit'],
+              'tyre_size_front' => $_POST['tyre_size_frnt_edit'],
+              'tyre_size_rear' => $_POST['tyre_size_rear_edit'],
+              'tyre_type_front' => $_POST['tyre_type_front_edit'],
+              'tyre_type_rear' => $_POST['tyre_type_rear_edit'],
+              'brake_type_size_front' => $_POST['brake_type_front_edit'],
+              'brake_type_size_rear' => $_POST['brake_type_rear_edit'],
+              'frame_type' => $_POST['frame_type_edit'],
+              'frame_type_front' => $_POST['frame_type_front_edit'],
+              'frame_type_rear' => $_POST['frame_type_rear_edit'],
+              'battery' => $_POST['battery_edit'],
+              'head_lamp' => $_POST['head_lamp_edit'],
+              'type_id' => $_POST['typ_id_edit'],
+              'vehicle_code' => $_POST['veh_code_edit'],
+              'vehicle' => $_POST['vehicle_edit'],
+              'vehicle_type' => $_POST['veh_typ_edit'],
+              'engine_no' => $_POST['eng_no_edit'],
+              'chassis_no' => $_POST['chassis_no_edit'],
+              'invoice_no' => $_POST['inv_no_edit'],
+              'inward_date' => $_POST['inw_date_edit'],
+              'specification' => $_POST['spec_edit'],
+              'reg_no' => $_POST['reg_no_edit']
             );
 
     // use key 'http' even if you send the request to https://...
@@ -599,7 +611,7 @@ $arr_types = json_decode($output_types,true);
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <select style="" class="mdl-selectfield__select"  name="typ_id" id="typ_id" required>
+          <select style="" class="mdl-selectfield__select"  name="typ_id_edit" id="typ_id_edit" required>
                       <option value="3">Bike</option>
                       <option value="4">Scooters</option>
                       <option value="5">Bullet</option>
@@ -617,7 +629,7 @@ $arr_types = json_decode($output_types,true);
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input type="file" name="fileToUpload" id="fileToUpload" required>
+          <input type="file" name="fileToUpload_edit" id="fileToUpload_edit">
           </div>
 
           <br>
@@ -1213,7 +1225,7 @@ $arr_types = json_decode($output_types,true);
         e.preventDefault();
         if(x < max_fields_limit){ //check conditions
             x++; //counter increment
-            $('.input_fields_container').append('<div><div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload[]" id="fileToUpload" required></div><a href="#" class="remove_field" style="margin-left:7%"><img src="images/del24.png"></a></div>'); //add input field
+            $('.input_fields_container').append('<div><div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload[]" id="fileToUpload"></div><a href="#" class="remove_field" style="margin-left:7%"><img src="images/del24.png"></a></div>'); //add input field
         }
     });  
     $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links
