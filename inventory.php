@@ -677,7 +677,7 @@ $arr_types = json_decode($output_types,true);
 
           <div class="input_fields_containers">
       <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload_edit[]" id="fileToUpload_edit"></div>
-          <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> <button class="btn btn-sm btn-primary add_more_buttons">Add More Fields</button></div>
+          <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> <button class="btn btn-sm btn-primary add_more_buttons">Add More Photos</button></div>
       </div>
     </div>
           <br>
@@ -1020,7 +1020,7 @@ $arr_types = json_decode($output_types,true);
 
           <div class="input_fields_container">
       <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload[]" id="fileToUpload" required></div>
-          <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> <button class="btn btn-sm btn-primary add_more_button">Add More Fields</button></div>
+          <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> <button class="btn btn-sm btn-primary add_more_button">Add More Photos</button></div>
       </div>
     </div>
 
