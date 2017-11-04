@@ -146,7 +146,7 @@ if($arr_check_wether_login['status'] != 200){
 
   <div class="row" id="row1" style="margin: auto;background-color:#607D8B;height:80px;">
     <div class="col-sm-1" style="margin-top:3%;">
-      <h6 style="margin-top:0%;">Insurance</h6>
+      <h6 style="margin-top:0%;">Inventory</h6>
     </div>
 
     <div class="col-sm-2" style="margin-top:3%">
@@ -288,6 +288,19 @@ $('.date').blur(function()
 
 <?php
 
+  require 'Cloudinary.php';
+  require 'Uploader.php';
+  require 'Api.php';
+
+
+  \Cloudinary::config(array( 
+          "cloud_name" => "hdccr1s1j", 
+          "api_key" => "219691739346645", 
+          "api_secret" => "xvNdA4XHLveENkYKCgbxEN1SqkM" 
+        ));
+?>
+<?php
+
 if(isset($_POST['add_vehicle'])){
 
 session_start();
@@ -357,16 +370,6 @@ session_start();
  /*echo count($_FILES['fileToUpload']);
  echo count($_FILES['fileToUpload']['name']);*/
 
-  require 'Cloudinary.php';
-  require 'Uploader.php';
-  require 'Api.php';
-
-
-  \Cloudinary::config(array( 
-          "cloud_name" => "hdccr1s1j", 
-          "api_key" => "219691739346645", 
-          "api_secret" => "xvNdA4XHLveENkYKCgbxEN1SqkM" 
-        ));
 
   for($k=0; $k<count($_FILES['fileToUpload']['name']);$k++){
     /*echo "hi";
@@ -413,6 +416,9 @@ session_start();
 
 <?php
 if(isset($_POST['edit_vehicle'])){
+  session_start();
+  $_SESSION['edit_v_id']= $_POST['v_id_edit'];
+
   $url = 'https://hondaproject.herokuapp.com/edit_vehicle_inventory/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
   $data = array(
               'pk_value' => $_POST['pk_value_edit'],
@@ -477,6 +483,49 @@ if(isset($_POST['edit_vehicle'])){
     $result = file_get_contents($url, false, $context);
     /*echo $result8;*/
     $arr = json_decode($result,true);
+
+
+    /*echo $_SESSION['edit_v_id'];*/
+    if ($_FILES['fileToUpload_edit']['size'][0] != 0){
+        for($l=0; $l<count($_FILES['fileToUpload_edit']['name']);$l++){
+            /*echo "hi";
+            echo $_FILES["fileToUpload_edit"]['tmp_name'][$l];*/
+                
+
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $charactersLength = strlen($characters);
+                $randomString = '';
+
+
+                for ($i = 0; $i < 6; $i++) {
+                    $randomString .= $characters[rand(0, $charactersLength - 1)];
+                }
+                $randomString='id'.$randomString;
+                
+
+                \Cloudinary\Uploader::upload($_FILES["fileToUpload_edit"]["tmp_name"][$l],
+                    array(
+                       "public_id" => "honda/".$randomString
+                    ));
+
+
+                $url_img_edit = 'https://hondaproject.herokuapp.com/save_vehicle_images/?access_token=PQtL7kGM2fVN14XMnn9kZnVvC3uuKP';
+
+
+                $options_img_edit = array(
+                  'http' => array(
+                    'header'  => array(
+                                   'V-ID: '.$_SESSION['edit_v_id'],
+                                   'LINK: '.$randomString
+                                 ),
+                    'method'  => 'GET',
+                  ),
+                );
+                  $context_img_edit  = stream_context_create($options_img_edit);
+                  $result_img_edit = file_get_contents($url_img_edit, false, $context_img_edit);
+
+          }
+    }
     
 }
 ?>
@@ -611,10 +660,10 @@ $arr_types = json_decode($output_types,true);
           </div>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <select style="" class="mdl-selectfield__select"  name="typ_id_edit" id="typ_id_edit" required>
-                      <option value="3">Bike</option>
-                      <option value="4">Scooters</option>
-                      <option value="5">Bullet</option>
+          <select style="" class="mdl-selectfield__select"  name="typ_id_edit" id="typ_id_edit">
+                      <?php for($z=0;$z<count($arr_types);$z++){?>
+                        <option style="color:#F1524B" value="<?php echo $arr_types[$z]['type_id'] ?>"><?php echo $arr_types[$z]['vehicle_type'] ?></option>
+                      <?php } ?>
 
                   </select>
           </div>
@@ -622,12 +671,12 @@ $arr_types = json_decode($output_types,true);
           <br>
 
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['v_id']  ?>" class="mdl-textfield__input" type="text" id="v_id_edit" name="v_id_edit" required>
-            <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">V id</label>
+           <input value="<?php echo $inventory_info['response'][$x]['inventory_details']['v_id']  ?>" class="mdl-textfield__input" type="hidden" id="v_id_edit" name="v_id_edit">
+            <!-- <label class="mdl-textfield__label" for="mobile" style="color:#cccccc;">V id</label> -->
           </div>
 
           <div class="input_fields_containers">
-      <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload_edit" id="fileToUpload_edit" required></div>
+      <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload_edit[]" id="fileToUpload_edit"></div>
           <div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> <button class="btn btn-sm btn-primary add_more_buttons">Add More Fields</button></div>
       </div>
     </div>
@@ -1246,7 +1295,7 @@ $arr_types = json_decode($output_types,true);
         e.preventDefault();
         if(x < max_fields_limit){ //check conditions
             x++; //counter increment
-            $('.input_fields_containers').append('<div><div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload_edit" id="fileToUpload_edit" required></div><a href="#" class="remove_field" style="margin-left:7%"><img src="images/del24.png"></a></div>'); //add input field
+            $('.input_fields_containers').append('<div><div style="margin-top:-2%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"><input type="file" name="fileToUpload_edit[]" id="fileToUpload_edit"></div><a href="#" class="remove_field" style="margin-left:7%"><img src="images/del24.png"></a></div>'); //add input field
 
         }
     });  
